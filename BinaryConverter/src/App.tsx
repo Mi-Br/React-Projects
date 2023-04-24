@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Box, Card, CardActionArea, CardActions, CardContent, Container, CssBaseline, FormHelperText, Grid, Input, InputLabel, TextField, ThemeProvider, Typography, createTheme } from '@mui/material'
+import { Box, Card, CardActionArea, CardActions, CardContent, Container, CssBaseline, FormHelperText, Grid, Input, InputLabel, Paper, TextField, ThemeProvider, Typography, createTheme } from '@mui/material'
 
 function App() {
 
@@ -13,18 +13,19 @@ function App() {
 
 
   const [error, setError] = useState(false)
-  const [result, setResult] = useState<number>()
+  const [result, setResult] = useState<number | null>()
 
   type fieldInput = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
 
   function onInputChange({ target }: fieldInput) {
-    // console.log(target.value)
     if (target.value.length > 0) {
       setError(!(/^[01]+$/.test(target.value)))
       if (!error) {
         const base10Number = parseInt(target.value, 2);
         setResult(base10Number)
       }
+    } else {
+      setResult(null)
     }
   }
 
